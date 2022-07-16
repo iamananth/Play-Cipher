@@ -22,6 +22,17 @@ function processKey() {
     var result = [];
     temp = temp.split('');
     while(temp[0]){
-        
+        result.push(temp.splice(0,5));
+    }
+    return result;
+}
+
+function cipher(){
+    var keyresult = processKey();
+    var res = [];
+    var error = 'String is empty';
+    var str = getPlainText();
+    if(str === ''){
+        document.getElementById('printValue').innerHTML = error;
     }
 }
