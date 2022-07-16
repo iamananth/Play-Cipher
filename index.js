@@ -3,17 +3,17 @@ var isEnd = false;
 var flag = false;
 var flagX = false;
 var flagAdd = false;
-function getKeyword(key) {
+function getKey(key) {
     var key = document.getElementById("key").value;
     return document.getElementById("key").value;
 }
 
-function getString() {
+function getPlainText() {
     return document.getElementById("string").value;
 }
 
 function processKey() {
-    var key = getKeyword();
+    var key = getKey();
     key = key.toUpperCase().replace(/\s/g, '').replace(/J/g, "I");
     var result = [];
     var temp = '';
@@ -36,8 +36,8 @@ function processKey() {
 function cipher() {
     var keyresult = processKey();
     var res = [];
-    var error = 'Warning!!! String is empty';
-    var str = getString();
+    var error = 'String is empty';
+    var str = getPlainText();
     if (str === '') {
         document.getElementById('printValue').innerHTML = error;
     }
@@ -89,53 +89,53 @@ function cipher() {
         var pair1 = textPhrase[i];
         var pair2 = textPhrase[i + 1];
         var p1i, p1j, p2i, p2j;
-        for (var stroka = 0; stroka < keyresult.length; stroka++) {
-            for (var stolbec = 0; stolbec < keyresult[stroka].length; stolbec++) {
-                if (keyresult[stroka][stolbec] == pair1) {
-                    p1i = stroka;
-                    p1j = stolbec;
+        for (var a = 0; a < keyresult.length; a++) {
+            for (var b = 0; b < keyresult[a].length; b++) {
+                if (keyresult[a][b] == pair1) {
+                    p1i = a;
+                    p1j = b;
                 }
-                if (keyresult[stroka][stolbec] == pair2) {
-                    p2i = stroka;
-                    p2j = stolbec;
+                if (keyresult[a][b] == pair2) {
+                    p2i = a;
+                    p2j = b;
                 }
             }
         }
-        var coord1 = '', coord2 = '';
+        var co1 = '', co2 = '';
 
         if (p1i === p2i) {
             if (p1j === 4) {
-                coord1 = keyresult[p1i][0];
+                co1 = keyresult[p1i][0];
             }
             else {
-                coord1 = keyresult[p1i][p1j + 1];
+                co1 = keyresult[p1i][p1j + 1];
             }
             if (p2j === 4) {
-                coord2 = keyresult[p2i][0];
+                co2 = keyresult[p2i][0];
             }
             else {
-                coord2 = keyresult[p2i][p2j + 1]
+                co2 = keyresult[p2i][p2j + 1]
             }
         }
         if (p1j === p2j) {
             if (p1i === 4) {
-                coord1 = keyresult[0][p1j];
+                co1 = keyresult[0][p1j];
             }
             else {
-                coord1 = keyresult[p1i + 1][p1j];
+                co1 = keyresult[p1i + 1][p1j];
             }
             if (p2i === 4) {
-                coord2 = keyresult[0][p2j];
+                co2 = keyresult[0][p2j];
             }
             else {
-                coord2 = keyresult[p2i + 1][p2j]
+                co2 = keyresult[p2i + 1][p2j]
             }
         }
         if (p1i !== p2i && p1j !== p2j) {
-            coord1 = keyresult[p1i][p2j];
-            coord2 = keyresult[p2i][p1j];
+            co1 = keyresult[p1i][p2j];
+            co2 = keyresult[p2i][p1j];
         }
-        enCodeStr = enCodeStr + coord1 + coord2;
+        enCodeStr = enCodeStr + co1 + co2;
     }
     document.getElementById("printValue").innerHTML = enCodeStr;
     // alert("Добавили букву в середине слова? - " + flagAdd);
@@ -145,7 +145,7 @@ function cipher() {
 function deCodeCipher() {
     var deCodeStr = '';
     var text = '';
-    var error = "Warning!!! String is empty";
+    var error = "String is empty";
     var text1 = cipher();
     if (text1 === '') {
         document.getElementById('printDeCode').innerHTML = error;
@@ -155,53 +155,53 @@ function deCodeCipher() {
         var pair1 = text1[i];
         var pair2 = text1[i + 1];
         var p1i, p1j, p2i, p2j;
-        for (var stroka = 0; stroka < keyresult.length; stroka++) {
-            for (var stolbec = 0; stolbec < keyresult[stroka].length; stolbec++) {
-                if (keyresult[stroka][stolbec] == pair1) {
-                    p1i = stroka;
-                    p1j = stolbec;
+        for (var a = 0; a < keyresult.length; a++) {
+            for (var b = 0; b < keyresult[a].length; b++) {
+                if (keyresult[a][b] == pair1) {
+                    p1i = a;
+                    p1j = b;
                 }
-                if (keyresult[stroka][stolbec] == pair2) {
-                    p2i = stroka;
-                    p2j = stolbec;
+                if (keyresult[a][b] == pair2) {
+                    p2i = a;
+                    p2j = b;
                 }
             }
         }
-        var coord1 = '', coord2 = '';
+        var co1 = '', co2 = '';
 
         if (p1i === p2i) {
             if (p1j === 0) {
-                coord1 = keyresult[p1i][4];
+                co1 = keyresult[p1i][4];
             }
             else {
-                coord1 = keyresult[p1i][p1j - 1];
+                co1 = keyresult[p1i][p1j - 1];
             }
             if (p2j === 0) {
-                coord2 = keyresult[p2i][4];
+                co2 = keyresult[p2i][4];
             }
             else {
-                coord2 = keyresult[p2i][p2j - 1]
+                co2 = keyresult[p2i][p2j - 1]
             }
         }
         if (p1j === p2j) {
             if (p1i === 0) {
-                coord1 = keyresult[4][p1j]
+                co1 = keyresult[4][p1j]
             }
             else {
-                coord1 = keyresult[p1i - 1][p1j];
+                co1 = keyresult[p1i - 1][p1j];
             }
             if (p2i === 0) {
-                coord2 = keyresult[4][p2j];
+                co2 = keyresult[4][p2j];
             }
             else {
-                coord2 = keyresult[p2i - 1][p2j]
+                co2 = keyresult[p2i - 1][p2j]
             }
         }
         if (p1i !== p2i && p1j !== p2j) {
-            coord1 = keyresult[p1i][p2j];
-            coord2 = keyresult[p2i][p1j];
+            co1 = keyresult[p1i][p2j];
+            co2 = keyresult[p2i][p1j];
         }
-        text = text + coord1 + coord2;
+        text = text + co1 + co2;
     }
     text = text.split('');
 
